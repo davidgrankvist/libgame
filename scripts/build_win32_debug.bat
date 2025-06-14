@@ -1,5 +1,7 @@
 @echo off
 
+pushd "%~dp0\.."
+
 mkdir bin > NUL 2>&1
 
 cl src\platform\win32.c src\common\*.c ^
@@ -18,3 +20,5 @@ cl src\platform\win32.c src\common\*.c ^
         gdi32.lib ^
         opengl32.lib ^
     /nologo
+
+popd

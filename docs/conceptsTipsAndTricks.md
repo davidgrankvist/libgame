@@ -1,21 +1,34 @@
-# Learned
+# Concepts, Tips and Tricks
 
-Things I've learned.
+Below are some game programming concepts, tips and tricks that were helpful when implementing this library.
 
 ## Platform Layer
 
-### Main structure
+The goal of a platform layer is to provide a common abstraction that's compatible with different platforms. The game calls the abstraction
+which then calls into the relevant platform specific functions.
 
-Some platforms require a specific main function, like WinMain on Windows. To deal with this,
-you can structure the code like this:
+### Structure
 
-1. have a platform-specific main
-2. set up function pointers that invoke platform specific code
-3. make the function pointers accessible from the game code entrypoint
+Internally, the platform layer needs to figure out which platform specific functions to call. There are two main ways to handle this:
 
-This way the platform owns the real entrypoint, but the game code is still able to call
-platform APIs. It is possible to define a "fake main" that makes it appear
-as the game code is using the regular main. Under the hood, the WinMain can then invoke this main.
+1. use ifdefs at build time
+2. use function pointers at runtime
+
+With ifdefs, you can have a single library entrypoint and include the relevant code for the build target. 
+The drawback of using ifdefs is that it's easy to end up with a lot of them spread out in the code base, which makes porting challenging.
+
+With function pointers, you can have platform specific library entrypoints that set up the relevant functions for the current build target.
+Then the platform independent code can call whatever function pointers were provided, without having to know which platform it calls into.
+
+It's also valid to use a combination of the two approaches, because some parts need to be set up at build time (for example library exports).
+
+#### Platform specific main
+
+Some platforms require a specific main function, like WinMain on Windows. This means that both the library code and
+game code need to own some platform specific code. To deal with this when using function pointers, you can let the library
+expose a platform specific initialization function which is then called from the platform main.
+
+One trick to hide the platform specific main from the game code is to add an ifdef in a library header that automatically includes a WinMain. In WinMain the platform initialization and game code main can be invoked. This way the game code runs a "fake main" that was actually called from WinMain.
 
 ### Input
 
@@ -32,7 +45,6 @@ OpenGL has two parts:
 
 Each platform is responsible for things like setting up the OpenGL context. The render backend can be shared between some platforms,
 but it is not entirely platform-independent since different platforms support different versions of OpenGL.
-For example OpenGL 3.3.0 is "desktop friendly", but not "mobile friendly".
 
 ## Graphics
 

@@ -1,15 +1,20 @@
-# flat-worlds
+# libgame
 
-A game about flat worlds.
+A library for making games.
 
 ## About
 
-One of the goals of this project is to implement a lot of things from scratch to learn things and enjoy the process.
-This is inspired by Casey Muratori's amazing Handmade Hero series.
+This is a game-flavoured platform layer. It provides utilities like creating windows, processing input and rendering.
+There are also additional abstractions like cameras.
 
-### Notes
+The library is written from scratch. This is inspired by Casey Muratori's amazing Handmade Hero series.
 
-I have notes about different things under [docs/](./docs/).
+## Documentation
+
+There are docs about different things under [docs/](./docs/):
+
+- for overview of things like code structure, building and porting, see [Developer Guide](./docs/developerGuide.md)
+- for a summary of some game programming concepts, see [Concepts, Tips and Tricks](./docs/conceptsTipsAndTricks.md)
 
 ## Resources
 

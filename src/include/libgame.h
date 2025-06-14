@@ -11,14 +11,12 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-// -- Set up platform specifics --
+// -- Set up platform library exports --
 
 #ifdef _WIN32
     #define LIBGAME_EXPORT __declspec(dllexport)
-
-    LIBGAME_EXPORT void InitMainWin32();
 #else
-    #error "Unsupported platform."
+    #error "Unsupported platform. No library export declaration has been defined."
 #endif
 
 // -- Math --
@@ -205,7 +203,14 @@ LIBGAME_EXPORT void ResolvePath(char* fileBaseName, FileExtensionType extension,
 LIBGAME_EXPORT bool LoadDynamicLibrary(char* libraryPath, DynamicLibrary* lib);
 LIBGAME_EXPORT void* LoadLibraryFunction(char* functionName, DynamicLibrary* lib);
 
-// define this in the game entrypoint
+// -- Platform initialization --
+
+#ifdef _WIN32
+    LIBGAME_EXPORT void InitMainWin32();
+#else
+    #error "Unsupported platform. No initialization has been defined."
+#endif
+
 #ifdef LIBGAME_MAIN
     #ifdef _WIN32
         #include <windows.h>
@@ -222,7 +227,7 @@ LIBGAME_EXPORT void* LoadLibraryFunction(char* functionName, DynamicLibrary* lib
             return main(__argc, __argv);
         }
     #else
-        #error "No main method has been defined for this platform."
+        #error "Unsupported platform. No platform specific main method has been defined."
     #endif
 #endif
 

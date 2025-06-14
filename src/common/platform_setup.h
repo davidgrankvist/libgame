@@ -109,7 +109,7 @@ void SetPlatformLibraryLoader(PlatformLibraryLoader libraryLoader);
     } OpenGlExt;
 #else
     // assume that OpenGL is the only render backend for now
-    #error "No supported OpenGL version was enabled."
+    #error "Unsupported platform. No supported OpenGL version was enabled."
 #endif
 
 void InitGraphicsGl(OpenGlExt openglExt); // call at window creation

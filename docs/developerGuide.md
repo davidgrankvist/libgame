@@ -13,7 +13,11 @@ The platform entrypoint is responsible for:
 
 ## Building
 
-First you need to set up the vendor/ directory (see the vendor section below). Then call the platform-specific build script under scripts/. 
+There are platform specific build script under scripts/.
+
+### Windows
+
+First set up vendor/ with `setup_vendor_win32.ps1`. Then build with `build_win32*.bat` from a VS developer shell.
 
 ## Vendor
 

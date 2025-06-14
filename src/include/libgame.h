@@ -11,12 +11,16 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-// -- Set up platform library exports --
+// -- Library exports --
 
-#ifdef _WIN32
-    #define LIBGAME_EXPORT __declspec(dllexport)
+#ifdef LIBGAME_STATIC_LINK
+    #define LIBGAME_EXPORT
 #else
-    #error "Unsupported platform. No library export declaration has been defined."
+    #ifdef _WIN32
+        #define LIBGAME_EXPORT __declspec(dllexport)
+    #else
+        #error "Unsupported platform. No dynamic library export declaration has been defined."
+    #endif
 #endif
 
 // -- Math --

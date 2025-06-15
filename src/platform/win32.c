@@ -2,9 +2,9 @@
  * Platform library entrypoint - Win32
  *
  * This file:
- * - sets up platform_setup.h function pointers
- * - implements the InitMainWin32 to be called from WinMain
- * - responds to events such as key presses
+ * - implements InitPlatform to be called from WinMain
+ * - sets up function pointers defined in platform_setup.h
+ * - responds to events such as key presses and calls into src/common utilities
  *
  * This is for a library build. The actual WinMain is included directly in the game code via a public header.
  */
@@ -35,7 +35,7 @@ HWND windowHwnd;
 HDC windowHdc;
 
 // Public API - Used in WinMain to set up platform function pointers.
-void InitMainWin32() {
+void InitPlatform() {
     if (getenv("DEBUG_CONSOLE")) {
         InitConsoleWin32();
     }

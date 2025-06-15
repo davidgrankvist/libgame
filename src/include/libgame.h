@@ -225,11 +225,7 @@ LIBGAME_EXPORT void* LoadLibraryFunction(char* functionName, DynamicLibrary* lib
 
 // -- Platform initialization --
 
-#ifdef _WIN32
-    LIBGAME_EXPORT void InitMainWin32();
-#else
-    #error "Unsupported platform. No initialization has been defined."
-#endif
+LIBGAME_EXPORT void InitPlatform();
 
 #ifdef LIBGAME_MAIN
     #ifdef _WIN32
@@ -243,7 +239,7 @@ LIBGAME_EXPORT void* LoadLibraryFunction(char* functionName, DynamicLibrary* lib
 
         int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
                 PWSTR pCmdLine, int nCmdShow) {
-            InitMainWin32();
+            InitPlatform();
             return main(__argc, __argv);
         }
     #else

@@ -181,7 +181,7 @@ typedef enum {
 } LogLevel;
 
 LIBGAME_EXPORT void SetLogLevel(LogLevel level); // minimum level to log
-LIBGAME_EXPORT void Log(const char* format, ...); // alias for LogInfo
+LIBGAME_EXPORT void Log(LogLevel level, const char* format, ...);
 LIBGAME_EXPORT void LogDebug(const char* format, ...);
 LIBGAME_EXPORT void LogInfo(const char* format, ...);
 LIBGAME_EXPORT void LogWarning(const char* format, ...);

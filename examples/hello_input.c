@@ -21,13 +21,13 @@ int main(int argc, char** argv) {
             CloseCurrentWindow();
         }
         if (IsKeyDown(KeySpace)) {
-            Log("Holding down space\n");
+            LogInfo("Holding down space\n");
         }
         if (IsKeyPressed(KeySpace)) {
-            Log("Started to hold down space\n");
+            LogInfo("Started to hold down space\n");
         }
         if (IsKeyReleased(KeySpace)) {
-            Log("Released space\n");
+            LogInfo("Released space\n");
         }
 
         DrawCursor();

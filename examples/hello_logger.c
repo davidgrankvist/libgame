@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
         if (IsKeyPressed(KeyTab)) {
             LogDebug("hello debug\n");
             LogInfo("hello info\n");
-            Log("hello info alias\n");
+            Log(LOG_INFO, "hello info with parameter\n");
             LogWarning("hello warning\n");
             LogError("hello error\n");
 

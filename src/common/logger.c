@@ -43,17 +43,20 @@ static const char* MapLevelToString(LogLevel level) {
         case LOG_ERROR:
             return "ERROR";
         default:
-            AssertFail("Failed to log level to string. Unknown log level %d", level);
+            AssertFail("Failed to map log level to string. Unknown log level %d", level);
             return "UNKNOWN";
     }
 }
 
-static void LogWith(LogLevel level, const char* format, va_list args) {
+void Log(LogLevel level, const char* format, ...) {
     if (level < logLevel) {
        return;
     }
 
     const char* levelPrefix = MapLevelToString(level);
+
+    va_list args;
+    va_start(args, format);
 
     if (level >= LOG_ERROR) {
         fprintf(stderr, "%s: ", levelPrefix);
@@ -62,17 +65,18 @@ static void LogWith(LogLevel level, const char* format, va_list args) {
         fprintf(stdout, "%s: ", levelPrefix);
         vfprintf(stdout, format, args);
     }
+
+    va_end(args);
 }
 
  #define DECLARE_LOG_FN(name, level) \
      void name(const char* format, ...) { \
          va_list args; \
          va_start(args, format); \
-         LogWith(level, format, args); \
+         Log(level, format, args); \
          va_end(args); \
      }
 
-DECLARE_LOG_FN(Log, LOG_INFO)
 DECLARE_LOG_FN(LogDebug, LOG_DEBUG)
 DECLARE_LOG_FN(LogInfo, LOG_INFO)
 DECLARE_LOG_FN(LogWarning, LOG_WARNING)

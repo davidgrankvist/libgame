@@ -1,23 +1,15 @@
 # Developer Guide
 
-## Code Structure
+## Directories
 
-- src/ - the engine code
 - src/include - public headers
 - src/common - platform independent shared utils
 - src/platform - platform specific library entrypoint
-
-The platform entrypoint is responsible for:
-1. initializing things for the src/common code (setting up OpenGL, etc.)
-2. calling internal src/common functions at the right time in response to platform events (input, draw, etc.)
-
-## Building
-
-There are platform specific build script under scripts/.
-
-### Windows
-
-First set up vendor/ with `setup_vendor_win32.ps1`. Then build with `build_win32*.bat` from a VS developer shell.
+- scripts/ - build/release scripts
+- bin/ - binaries
+- release/ - release artifacts, including headers and static/dynamic libraries
+- vendor/ - external headers (downloaded with scripts)
+- examples/ - showcases library features
 
 ## Vendor
 
@@ -43,9 +35,10 @@ There are some extension headers that define the types of the dynamically loaded
 For the most part function pointers are used to avoid a ton of ifdefs.
 
 To port, you need to:
-- add a new library entrypoint in src/platform
-- implement and set up the function pointers defined in src/common/platform_setup.h
-- update platform the library export and initialization parts of src/include/libgame.h
+- add a new library entrypoint in src/platform. The platform specific code needs to:
+    - implement and set up the function pointers defined in src/common/platform_setup.h
+    - respond to relevant platform events and call into src/common utilities (for example updating input buffers)
+- update platform specifc library export and initialization parts of src/include/libgame.h
 
 To target a specific OpenGL version, you need to define a macro at build time (LIBGAME_OPENGL_RENDER_330 for OpenGL 3.3.0). The macro is used in src/common/platform_setup.h to define which OpenGL functions to load dynamically.
 

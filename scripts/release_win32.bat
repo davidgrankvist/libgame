@@ -1,12 +1,14 @@
 @echo off
 
+REM Usage: .\release_win32.bat version
+REM If the version argument is omitted, a dummy local version is used.
+
+set default_local_version=0.0.1-local
 set version=%1
-set help_text=Usage: .\release_win32.bat version
 
 if "%version%" == "" (
-    echo Please provide a version.
-    echo %help_text%
-    exit 1
+    echo No release version provided. Defaulting to "%default_local_version%.
+    set version=%default_local_version%
 )
 
 pushd "%~dp0\.."
@@ -40,6 +42,6 @@ call .\scripts\build_win32.bat release static
 copy .\bin\*.lib %release_dir%\lib\
 
 echo Creating archive %release_dir%.zip
-powershell -Command "Compress-Archive -Path %release_dir% -DestinationPath %release_dir%.zip"
+powershell -Command "Compress-Archive -Path %release_dir% -DestinationPath %release_dir%.zip -Force"
 
 popd

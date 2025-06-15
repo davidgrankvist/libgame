@@ -4,16 +4,70 @@ A library for making games.
 
 ## About
 
-This is a game-flavoured platform layer. It provides utilities like creating windows, processing input and rendering.
-There are also additional abstractions like cameras.
+This is a game-flavoured platform layer. It provides utilities like creating windows, processing input and rendering 2D or 3D graphics.
+There are also additional abstractions like cameras and math helpers.
 
 The library is written from scratch. This is inspired by Casey Muratori's amazing Handmade Hero series.
 
+## Usage
+
+The easiest way to get started is by looking at the [examples/](./examples/) directory. Also check out the public headers in the include/ directory of the release build or in [src/include](./src/include) in this repository.
+
+Here is a simple hello world example.
+```cs
+/*
+ * Create a window with a triangle.
+ *
+ * The LIBGAME_MAIN macro is only needed in the file with the main function.
+ */
+
+#define LIBGAME_MAIN
+#include "libgame.h"
+
+int main(int argc, char** argv) {
+    InitWindow("hello triangle");
+    SetTargetFps(60);
+
+    Color backgroundColor = { 1, 1, 1, 1 };
+    Color triangleColor = { 1, 0, 0, 1 };
+
+    Vec2 a = { 50, 50 };
+    Vec2 b = { 250, 50 };
+    Vec2 c = { 50, 250 };
+
+    while (IsWindowOpen()) {
+        ProcessInput();
+        SleepUntilNextFrame();
+
+        ClearScreen(backgroundColor);
+        DrawTriangle2D(a, b, c, triangleColor);
+        MakeDrawCall();
+        EndFrame();
+    }
+
+    return 0;
+}
+```
+
+## Installation
+
+There are no prebuilt binaries, but you can clone the repository and build from source.
+
+### Windows
+
+These scripts require a Visual Studio developer shell.
+
+On the first build, run `.\scripts\setup_vendor_win32.ps1` to download external headers. Then you have two options:
+
+If you want a release build ready for usage, call `.\scripts\release_win32.bat` and use the binaries and headers in the `release` directory.
+
+If you want more control like outputting debug symbols you can call `.\scripts\build_win32.bat <debug/release> <dynamic/static>` and use the binaries in the `bin` directory. This will not copy any headers, but you can find the public headers in `src\include`.
+
 ## Documentation
 
-There are docs about different things under [docs/](./docs/):
+For docs, see the docs [docs/](./docs/) directory:
 
-- for overview of things like code structure, building and porting, see [Developer Guide](./docs/developerGuide.md)
+- for overview of things like code structure and porting, see [Developer Guide](./docs/developerGuide.md)
 - for a summary of some game programming concepts, see [Concepts, Tips and Tricks](./docs/conceptsTipsAndTricks.md)
 
 ## Resources

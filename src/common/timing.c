@@ -15,6 +15,7 @@ uint64_t GetTicks() {
 }
 
 void SetTargetFps(int fps) {
+    ResetFpsTimer();
     targetFps = fps;
 }
 

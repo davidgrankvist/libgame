@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include "libgame.h"
 #include "platform_setup.h"
+#include "logger.h"
 
 static PlatformWindow platformWindow = {};
 static bool shouldRun = true;
@@ -22,6 +23,7 @@ void InitWindow(const char* title) {
 
 void InitConsole() {
    platformWindow.InitConsole();
+   InitLogger();
 }
 
 bool IsWindowOpen() {

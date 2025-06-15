@@ -171,6 +171,22 @@ LIBGAME_EXPORT int GetClientWidth();
 LIBGAME_EXPORT int GetClientHeight();
 LIBGAME_EXPORT void InitConsole();
 
+// -- Logging --
+
+typedef enum {
+    LOG_DEBUG,
+    LOG_INFO,
+    LOG_WARNING,
+    LOG_ERROR,
+} LogLevel;
+
+LIBGAME_EXPORT void SetLogLevel(LogLevel level); // minimum level to log
+LIBGAME_EXPORT void Log(const char* format, ...); // alias for LogInfo
+LIBGAME_EXPORT void LogDebug(const char* format, ...);
+LIBGAME_EXPORT void LogInfo(const char* format, ...);
+LIBGAME_EXPORT void LogWarning(const char* format, ...);
+LIBGAME_EXPORT void LogError(const char* format, ...);
+
 // -- Timing --
 
 #define TICKS_PER_SECOND 1000000

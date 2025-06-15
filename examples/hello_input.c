@@ -1,17 +1,16 @@
 /*
- * Read keyboard input and print things.
+ * Read keyboard input and print things when pressing space.
  * Draw a triangle at the mouse position.
  */
 
 #define LIBGAME_MAIN
 #include "libgame.h"
-#include <stdio.h>
 
 void DrawCursor();
 
 int main(int argc, char** argv) {
     InitWindow("hello input");
-    InitConsole(); // set up console for printf
+    InitConsole();
     SetTargetFps(60);
 
     while (IsWindowOpen()) {
@@ -22,13 +21,13 @@ int main(int argc, char** argv) {
             CloseCurrentWindow();
         }
         if (IsKeyDown(KeySpace)) {
-            printf("Holding down space\n");
+            Log("Holding down space\n");
         }
         if (IsKeyPressed(KeySpace)) {
-            printf("Started to hold down space\n");
+            Log("Started to hold down space\n");
         }
         if (IsKeyReleased(KeySpace)) {
-            printf("Released space\n");
+            Log("Released space\n");
         }
 
         DrawCursor();

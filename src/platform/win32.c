@@ -265,17 +265,6 @@ void InitConsoleWin32() {
         bool didAlloc = AllocConsole();
         Assert(didAlloc, "Failed to allocate a console");
     }
-
-    FILE* result = NULL;
-
-    result = freopen("CONOUT$", "w", stdout);
-    Assert(result != NULL, "Failed to configure STDOUT");
-
-    result = freopen("CONOUT$", "w", stderr);
-    Assert(result != NULL, "Failed to configure STDERR");
-
-    result = freopen("CONOUT$", "r", stdin);
-    Assert(result != NULL, "Failed to configure STDIN");
 }
 
 // -- Input --

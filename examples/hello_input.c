@@ -20,11 +20,11 @@ int main(int argc, char** argv) {
         if (IsKeyPressed(KeyEsc)) {
             CloseCurrentWindow();
         }
-        if (IsKeyDown(KeySpace)) {
-            LogInfo("Holding down space\n");
-        }
         if (IsKeyPressed(KeySpace)) {
             LogInfo("Started to hold down space\n");
+        }
+        if (IsKeyDown(KeySpace)) {
+            LogInfo("Holding down space\n");
         }
         if (IsKeyReleased(KeySpace)) {
             LogInfo("Released space\n");

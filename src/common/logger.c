@@ -54,11 +54,12 @@ static void LogWith(LogLevel level, const char* format, va_list args) {
     }
 
     const char* levelPrefix = MapLevelToString(level);
-    printf("%s: ", levelPrefix);
 
     if (level >= LOG_ERROR) {
+        fprintf(stderr, "%s: ", levelPrefix);
         vfprintf(stderr, format, args);
     } else {
+        fprintf(stdout, "%s: ", levelPrefix);
         vfprintf(stdout, format, args);
     }
 }
@@ -76,3 +77,12 @@ DECLARE_LOG_FN(LogDebug, LOG_DEBUG)
 DECLARE_LOG_FN(LogInfo, LOG_INFO)
 DECLARE_LOG_FN(LogWarning, LOG_WARNING)
 DECLARE_LOG_FN(LogError, LOG_ERROR)
+
+void LogAssert(const char* file, int line, const char* format, ...) {
+    va_list args;
+    va_start(args, format);
+    fprintf(stderr, "ASSERT: ");
+    vfprintf(stderr, format, args);
+    fprintf(stderr, "\n    at %s:%d\n", file, line);
+    va_end(args);
+}

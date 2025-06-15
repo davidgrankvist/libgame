@@ -21,11 +21,6 @@ void InitWindow(const char* title) {
     platformWindow.InitWindow(title);
 }
 
-void InitConsole() {
-   platformWindow.InitConsole();
-   InitLogger();
-}
-
 bool IsWindowOpen() {
    return shouldRun;
 }

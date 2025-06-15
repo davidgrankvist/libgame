@@ -33,7 +33,7 @@ MSG msg = {};
 HWND windowHwnd;
 HDC windowHdc;
 
-static void InitConsoleWin32();
+static void InitPlatformConsoleWin32();
 static void InitPlatformWindowWin32();
 static void InitInputWin32();
 static void InitRenderGlWin32();
@@ -42,13 +42,11 @@ static void InitLibraryLoaderWin32();
 
 // Public API - Called in WinMain to set up win32 for usage. See libgame.h.
 void InitPlatform() {
-    if (getenv("DEBUG_CONSOLE")) {
-        InitConsoleWin32();
-    }
     windowHInstance = GetModuleHandle(NULL);
     windowNCmdShow = SW_SHOWDEFAULT;
 
     InitPlatformWindowWin32();
+    InitPlatformConsoleWin32();
     InitInputWin32();
     InitRenderGlWin32();
     InitTimingWin32();
@@ -62,7 +60,6 @@ static void InitWindowWin32(const char* windowTitle);
 static void InitPlatformWindowWin32() {
     PlatformWindow platformWindow = {};
     platformWindow.InitWindow = InitWindowWin32;
-    platformWindow.InitConsole = InitConsoleWin32;
     InitPlatformWindow(platformWindow);
 }
 
@@ -256,11 +253,26 @@ static void MapAndSetResolution(LPARAM lParam) {
 
 // -- Console --
 
-void InitConsoleWin32() {
+void AttachConsoleWin32() {
     if (!AttachConsole(ATTACH_PARENT_PROCESS)) {
         bool didAlloc = AllocConsole();
         Assert(didAlloc, "Failed to allocate a console");
     }
+}
+
+void InitPlatformConsoleWin32() {
+    PlatformConsole platformConsole = {};
+    platformConsole.AttachConsole = AttachConsoleWin32;
+    /*
+     * These file names are reserved on Windows for console usage.
+     *
+     * See the CreateFileA docs:
+     *  https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilea#consoles
+     */
+    platformConsole.stdoutName = "CONOUT$";
+    platformConsole.stderrName = "CONOUT$";
+    platformConsole.stdinName = "CONIN$";
+    InitPlatformConsole(platformConsole);
 }
 
 // -- Input --

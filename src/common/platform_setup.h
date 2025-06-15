@@ -24,12 +24,28 @@
 
 typedef struct {
     void (*InitWindow)(const char* title);
-    void (*InitConsole)();
 } PlatformWindow;
 
 void InitPlatformWindow(PlatformWindow platformWindow);
 
 void SetResolution(int clientWidth, int clientHeight);
+
+// -- Console --
+
+typedef struct {
+    void (*AttachConsole)();
+    const char* stdoutName;
+    const char* stderrName;
+    const char* stdinName;
+} PlatformConsole;
+
+/*
+ * Prepares InitConsole for usage.
+ *
+ * Automatically calls InitConsole if the environment variable DEBUG_CONSOLE is set
+ */
+void InitPlatformConsole(PlatformConsole platformConsole);
+
 
 // -- Input --
 

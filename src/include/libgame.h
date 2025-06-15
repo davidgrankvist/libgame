@@ -169,6 +169,9 @@ LIBGAME_EXPORT bool IsWindowOpen();
 LIBGAME_EXPORT void CloseCurrentWindow();
 LIBGAME_EXPORT int GetClientWidth();
 LIBGAME_EXPORT int GetClientHeight();
+
+// -- Console --
+
 LIBGAME_EXPORT void InitConsole();
 
 // -- Logging --

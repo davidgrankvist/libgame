@@ -40,5 +40,4 @@ foreach ($file in $vendorHeaders) {
 
     $fileStream.Close()
     $stream.Close()
-
 }

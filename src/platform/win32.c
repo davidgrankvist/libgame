@@ -13,10 +13,11 @@
 #define UNICODE
 #endif
 
+#define LIBGAME_PLATFORM_SETUP_WITH_OS_HEADER
+#define LIBGAME_PLATFORM_SETUP_WITH_OPENGL
 #include "platform_setup.h"
 
 #include <timeapi.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 #include <gl/wglext.h>
@@ -25,16 +26,21 @@
 #include "opengl_render.h"
 #include "input.h"
 
-static void InitConsoleWin32();
-static void InitPlatformWin32();
-
+// window state
 HINSTANCE windowHInstance;
 int windowNCmdShow;
 MSG msg = {};
 HWND windowHwnd;
 HDC windowHdc;
 
-// Public API - Used in WinMain to set up platform function pointers.
+static void InitConsoleWin32();
+static void InitPlatformWindowWin32();
+static void InitInputWin32();
+static void InitRenderGlWin32();
+static void InitTimingWin32();
+static void InitLibraryLoaderWin32();
+
+// Public API - Called in WinMain to set up win32 for usage. See libgame.h.
 void InitPlatform() {
     if (getenv("DEBUG_CONSOLE")) {
         InitConsoleWin32();
@@ -42,16 +48,6 @@ void InitPlatform() {
     windowHInstance = GetModuleHandle(NULL);
     windowNCmdShow = SW_SHOWDEFAULT;
 
-    InitPlatformWin32();
-}
-
-static void InitPlatformWindowWin32();
-static void InitInputWin32();
-static void InitRenderGlWin32();
-static void InitTimingWin32();
-static void InitLibraryLoaderWin32();
-
-static void InitPlatformWin32() {
     InitPlatformWindowWin32();
     InitInputWin32();
     InitRenderGlWin32();

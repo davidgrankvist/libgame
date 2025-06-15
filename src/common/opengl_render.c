@@ -22,6 +22,8 @@
  * - pass through the given position and color
  */
 #include <stdlib.h>
+#define LIBGAME_PLATFORM_SETUP_WITH_OS_HEADER
+#define LIBGAME_PLATFORM_SETUP_WITH_OPENGL
 #include "platform_setup.h"
 #include "opengl_render.h"
 #include "libgame_math.h"

@@ -2,14 +2,19 @@
  * Platform setup - prepares the platform layer.
  *
  * Set up a platform by passing in implementations via function pointers.
+ *
+ * The macros called LIBGAME_PLATFORM_SETUP_WITH* are for optimizing build times.
+ * The caller decides whether to include Windows/OpenGL headers.
  */
 
 #ifndef platform_setup_h
 #define platform_setup_h
 
-#ifdef _WIN32
-    #define WIN32_LEAN_AND_MEAN
-    #include <windows.h>
+#ifdef LIBGAME_PLATFORM_SETUP_WITH_OS_HEADER
+    #ifdef _WIN32
+        #define WIN32_LEAN_AND_MEAN
+        #include <windows.h>
+    #endif
 #endif
 
 #include <stdint.h>
@@ -73,45 +78,47 @@ void SetPlatformLibraryLoader(PlatformLibraryLoader libraryLoader);
 
 // -- OpenGL initialization --
 
-#ifdef LIBGAME_OPENGL_RENDER_330
-    #include <gl/gl.h>
+#ifdef LIBGAME_PLATFORM_SETUP_WITH_OPENGL
+    #ifdef LIBGAME_OPENGL_RENDER_330
+        #include <gl/gl.h>
 
-    // set up glext.h
-    #define GL_VERSION_3_3 1
-    #define GL_GLEXT_PROTOTYPES
+        // set up glext.h
+        #define GL_VERSION_3_3 1
+        #define GL_GLEXT_PROTOTYPES
 
-    #include <gl/glext.h>
+        #include <gl/glext.h>
 
-    // OpenGL extensions that are dynamically loaded by the platform layer (assumes 3.3.0)
-    typedef struct {
-        PFNGLBINDBUFFERPROC glBindBuffer;
-        PFNGLGENBUFFERSPROC glGenBuffers;
-        PFNGLBUFFERDATAPROC glBufferData;
-        PFNGLATTACHSHADERPROC glAttachShader;
-        PFNGLCOMPILESHADERPROC glCompileShader;
-        PFNGLCREATEPROGRAMPROC glCreateProgram;
-        PFNGLCREATESHADERPROC glCreateShader;
-        PFNGLDELETESHADERPROC glDeleteShader;
-        PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArray;
-        PFNGLLINKPROGRAMPROC glLinkProgram;
-        PFNGLSHADERSOURCEPROC glShaderSource;
-        PFNGLUSEPROGRAMPROC glUseProgram;
-        PFNGLVERTEXATTRIBPOINTERPROC glVertexAttribPointer;
-        PFNGLBINDVERTEXARRAYPROC glBindVertexArray;
-        PFNGLGENVERTEXARRAYSPROC glGenVertexArrays;
-        PFNGLGETSHADERIVPROC glGetShaderiv;
-        PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
-        PFNGLGETPROGRAMIVPROC glGetProgramiv;
-        PFNGLGETPROGRAMINFOLOGPROC glGetProgramInfoLog;
-        PFNGLBUFFERSUBDATAPROC glBufferSubData;
-        PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation;
-        PFNGLUNIFORMMATRIX4FVPROC glUniformMatrix4fv;
-    } OpenGlExt;
-#else
-    // assume that OpenGL is the only render backend for now
-    #error "Unsupported platform. No supported OpenGL version was enabled."
+        // OpenGL extensions that are dynamically loaded by the platform layer (assumes 3.3.0)
+        typedef struct {
+            PFNGLBINDBUFFERPROC glBindBuffer;
+            PFNGLGENBUFFERSPROC glGenBuffers;
+            PFNGLBUFFERDATAPROC glBufferData;
+            PFNGLATTACHSHADERPROC glAttachShader;
+            PFNGLCOMPILESHADERPROC glCompileShader;
+            PFNGLCREATEPROGRAMPROC glCreateProgram;
+            PFNGLCREATESHADERPROC glCreateShader;
+            PFNGLDELETESHADERPROC glDeleteShader;
+            PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArray;
+            PFNGLLINKPROGRAMPROC glLinkProgram;
+            PFNGLSHADERSOURCEPROC glShaderSource;
+            PFNGLUSEPROGRAMPROC glUseProgram;
+            PFNGLVERTEXATTRIBPOINTERPROC glVertexAttribPointer;
+            PFNGLBINDVERTEXARRAYPROC glBindVertexArray;
+            PFNGLGENVERTEXARRAYSPROC glGenVertexArrays;
+            PFNGLGETSHADERIVPROC glGetShaderiv;
+            PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
+            PFNGLGETPROGRAMIVPROC glGetProgramiv;
+            PFNGLGETPROGRAMINFOLOGPROC glGetProgramInfoLog;
+            PFNGLBUFFERSUBDATAPROC glBufferSubData;
+            PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation;
+            PFNGLUNIFORMMATRIX4FVPROC glUniformMatrix4fv;
+        } OpenGlExt;
+    #else
+        // assume that OpenGL is the only render backend for now
+        #error "Unsupported platform. No supported OpenGL version was enabled."
+    #endif
+
+    void InitGraphicsGl(OpenGlExt openglExt); // call at window creation
 #endif
-
-void InitGraphicsGl(OpenGlExt openglExt); // call at window creation
 
 #endif

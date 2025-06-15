@@ -7,7 +7,7 @@ A library for making games.
 This is a game-flavoured platform layer. It provides utilities like creating windows, processing input and rendering 2D or 3D graphics.
 There are also additional abstractions like cameras and math helpers.
 
-The library is written from scratch. This is inspired by Casey Muratori's amazing Handmade Hero series.
+The library is written from scratch, with the exception of using OS APIs and the C standard library. This is inspired by Casey Muratori's amazing Handmade Hero series.
 
 ## Usage
 
@@ -51,21 +51,20 @@ int main(int argc, char** argv) {
 
 ## Installation
 
-There are no prebuilt binaries, but you can clone the repository and build from source.
+The library is under construction, so there are no prebuilt binaries at this point. You can still clone the repository and build from source though.
 
-### Windows
+### Building for Windows
 
 These scripts require a Visual Studio developer shell.
 
-On the first build, run `.\scripts\setup_vendor_win32.ps1` to download external headers. Then you have two options:
+Before the first build, run `.\scripts\setup_vendor_win32.ps1` to download external headers. Then you have two options:
 
-If you want a release build ready for usage, call `.\scripts\release_win32.bat` and use the binaries and headers in the `release` directory.
-
-If you want more control like outputting debug symbols you can call `.\scripts\build_win32.bat <debug/release> <dynamic/static>` and use the binaries in the `bin` directory. This will not copy any headers, but you can find the public headers in `src\include`.
+1. (recommended) If you want a release build ready for usage, call `.\scripts\release_win32.bat` and use the binaries and headers in the `release` directory.
+2. If you want more control like outputting debug symbols you can call `.\scripts\build_win32.bat <debug/release> <dynamic/static>` and use the binaries in the `bin` directory. This will not copy any headers, but you can find the public headers in `src\include`.
 
 ## Documentation
 
-For docs, see the docs [docs/](./docs/) directory:
+There is additional information in the [docs/](./docs/) directory:
 
 - for overview of things like code structure and porting, see [Developer Guide](./docs/developerGuide.md)
 - for a summary of some game programming concepts, see [Concepts, Tips and Tricks](./docs/conceptsTipsAndTricks.md)

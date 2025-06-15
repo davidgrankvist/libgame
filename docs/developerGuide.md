@@ -42,3 +42,6 @@ To port, you need to:
 
 To target a specific OpenGL version, you need to define a macro at build time (LIBGAME_OPENGL_RENDER_330 for OpenGL 3.3.0). The macro is used in src/common/platform_setup.h to define which OpenGL functions to load dynamically.
 
+## Examples
+
+Under examples/ there are some small reference applications to showcase different features. There are scripts launching individual examples or building all of them. This is handy for prototyping features, documenting what works and checking the impact of breaking changes.

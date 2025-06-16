@@ -5,7 +5,6 @@
 
 #define LIBGAME_WITH_MAIN
 #include "libgame.h"
-#include "libgame_math.h"
 
 typedef struct {
     Vec2 a;

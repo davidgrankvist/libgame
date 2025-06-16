@@ -1,6 +1,5 @@
 #include "libgame.h"
 #include "camera.h"
-#include "libgame_math.h"
 
 static int clientWidth = 0;
 static int clientHeight = 0;

@@ -12,7 +12,7 @@ The API design is inspired by Ramon Santamaria's fantastic library [raylib](http
 
 ## Usage
 
-The easiest way to get started is by looking in the [examples/](./examples/) directory. Also check out the [public headers](./src/include/).
+The easiest way to get started is by looking in the [examples/](./examples/) directory. Also check out the [public header](./src/include/libgame.h).
 
 Here is a simple hello world example.
 ```cs

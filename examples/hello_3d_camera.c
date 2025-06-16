@@ -4,7 +4,6 @@
 
 #define LIBGAME_WITH_MAIN
 #include "libgame.h"
-#include "libgame_math.h"
 
 int main(int argc, char** argv) {
     InitWindow("hello 3D camera");

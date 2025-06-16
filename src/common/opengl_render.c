@@ -25,7 +25,6 @@
 #define LIBGAME_WITH_OPENGL_PREREQS
 #define LIBGAME_WITH_OPENGL_330
 #include "opengl_render.h"
-#include "libgame_math.h"
 #include "camera.h"
 #include "asserts.h"
 

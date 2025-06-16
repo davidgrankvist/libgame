@@ -2,7 +2,7 @@
  * Draw a fixed triangle and move a 2D camera around with WASD.
  */
 
-#define LIBGAME_MAIN
+#define LIBGAME_WITH_MAIN
 #include "libgame.h"
 
 int main(int argc, char** argv) {

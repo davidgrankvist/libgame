@@ -13,17 +13,18 @@
 #define UNICODE
 #endif
 
-#define LIBGAME_PLATFORM_SETUP_WITH_OS_HEADER
-#define LIBGAME_PLATFORM_SETUP_WITH_OPENGL
-#include "platform_setup.h"
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
 
 #include <timeapi.h>
 #include <stdlib.h>
 
+#define LIBGAME_WITH_OPENGL_330
+#include "opengl_render.h"
 #include <gl/wglext.h>
 
+#include "platform_setup.h"
 #include "asserts.h"
-#include "opengl_render.h"
 #include "input.h"
 
 // window state

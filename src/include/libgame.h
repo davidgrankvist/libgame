@@ -13,7 +13,7 @@
 
 // -- Library exports --
 
-#ifdef LIBGAME_STATIC_LINK
+#ifdef LIBGAME_BUILD_STATIC_LINK
     #define LIBGAME_EXPORT
 #else
     #ifdef _WIN32
@@ -230,7 +230,7 @@ LIBGAME_EXPORT void* LoadLibraryFunction(char* functionName, DynamicLibrary* lib
 
 LIBGAME_EXPORT void InitPlatform();
 
-#ifdef LIBGAME_MAIN
+#ifdef LIBGAME_WITH_MAIN
     #ifdef _WIN32
         #include <windows.h>
 

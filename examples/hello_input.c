@@ -3,7 +3,7 @@
  * Draw a triangle at the mouse position.
  */
 
-#define LIBGAME_MAIN
+#define LIBGAME_WITH_MAIN
 #include "libgame.h"
 
 void DrawCursor();

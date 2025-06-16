@@ -30,7 +30,6 @@ echo Link type: %link_type%
 
 set common_src=src\platform\win32.c src\common\*.c
 set common_flags_dynamic=^
-    /DLIBGAME_OPENGL_RENDER_330 ^
     /LD ^
     /Fe: bin\libgame.dll ^
     /Fo: bin\ ^
@@ -48,8 +47,7 @@ set common_flags_dynamic=^
 
 set common_flags_static=^
     /c ^
-    /DLIBGAME_STATIC_LINK ^
-    /DLIBGAME_OPENGL_RENDER_330 ^
+    /DLIBGAME_BUILD_STATIC_LINK ^
     /Fo: bin\ ^
     /Fd: bin\libgame.pdb ^
     /I"src\include" ^

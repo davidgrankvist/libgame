@@ -2,7 +2,7 @@
  * Draw a 3D quad and use a camera to orbit around it.
  */
 
-#define LIBGAME_MAIN
+#define LIBGAME_WITH_MAIN
 #include "libgame.h"
 #include "libgame_math.h"
 

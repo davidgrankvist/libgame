@@ -5,7 +5,7 @@
  * Why not printf? You can use printf in some cases, but if you link dynamically
  * you need to set it up by calling freopen from the game code.
  */
-#define LIBGAME_MAIN
+#define LIBGAME_WITH_MAIN
 #include "libgame.h"
 
 int main(int argc, char** argv) {

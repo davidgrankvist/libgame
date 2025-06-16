@@ -3,7 +3,7 @@
  * This is to animate based on time rather than the specific frame rate.
  */
 
-#define LIBGAME_MAIN
+#define LIBGAME_WITH_MAIN
 #include "libgame.h"
 #include "libgame_math.h"
 

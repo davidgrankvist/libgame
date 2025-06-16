@@ -19,10 +19,11 @@ Here is a simple hello world example.
 /*
  * Create a window with a triangle.
  *
- * The LIBGAME_MAIN macro is only needed in the file with the main function.
+ * In the file with main(), you need to define LIBGAME_WITH_MAIN
+ * before the include.
  */
 
-#define LIBGAME_MAIN
+#define LIBGAME_WITH_MAIN
 #include "libgame.h"
 
 int main(int argc, char** argv) {

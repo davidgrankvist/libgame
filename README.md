@@ -4,14 +4,15 @@ A library for making games.
 
 ## About
 
-This is a game-flavoured platform layer. It provides utilities like creating windows, processing input and rendering 2D or 3D graphics.
-There are also additional abstractions like cameras and math helpers.
+This is a game-flavoured platform layer. It provides utilities for creating windows, processing input and rendering 2D or 3D graphics.
+There are also additional abstractions such as cameras and math helpers.
 
-The library is written from scratch, with the exception of using OS APIs and the C standard library. This is inspired by Casey Muratori's amazing Handmade Hero series.
+The library is written from scratch. This is inspired by Casey Muratori's amazing [Handmade Hero](https://guide.handmadehero.org/) series.
+The API design is inspired by Ramon Santamaria's fantastic library [raylib](https://www.raylib.com/index.html).
 
 ## Usage
 
-The easiest way to get started is by looking at the [examples/](./examples/) directory. Also check out the public headers in the include/ directory of the release build or in [src/include](./src/include) in this repository.
+The easiest way to get started is by looking in the [examples/](./examples/) directory. Also check out the [public headers](./src/include/).
 
 Here is a simple hello world example.
 ```cs
@@ -71,10 +72,6 @@ There is additional information in the [docs/](./docs/) directory:
 
 ## Resources
 
-You can browse the Handmade Hero episodes at <https://guide.handmadehero.org/>. It's great.
-
 To get started with the Windows APIs, see the [win32 guide](https://learn.microsoft.com/en-us/windows/win32/learnwin32/learn-to-program-for-windows).
 
-To get started with OpenGL, check out <https://learnopengl.com/>.
-
-For inspiration on platform API design, check out [raylib](https://www.raylib.com/index.html).
+To get started with OpenGL, check out [Learn OpenGL](https://learnopengl.com/).

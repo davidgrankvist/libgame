@@ -62,6 +62,7 @@ typedef struct {
     void (*DrawTriangle2D)(Vec2 a, Vec2 b, Vec2 c, Color color);
     void (*DrawTriangle3D)(Vec3 a, Vec3 b, Vec3 c, Color color);
     void (*DrawQuad3D)(Vec3 topLeft, Vec3 topRight, Vec3 bottomLeft, Vec3 bottomRight, Color color);
+    void (*SetTransparencyMode)(bool shouldEnable);
 } PlatformRender;
 
 void InitPlatformRender(PlatformRender platformRender);

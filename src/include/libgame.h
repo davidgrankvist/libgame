@@ -156,6 +156,13 @@ LIBGAME_EXPORT void MoveCameraFirstPerson(Camera3D* camera, Vec3 relativeOffset)
 LIBGAME_EXPORT void OrbitCameraAboutTarget(Camera3D* camera, float azimuth, float elevation);
 LIBGAME_EXPORT void MoveCameraTowardsTarget(Camera3D* camera, float distanceOffset);
 
+/*
+ * Enable/disable color blending. This is active across multiple draw calls.
+ *
+ * Disabled by default.
+ */
+LIBGAME_EXPORT void SetTransparencyMode(bool shouldEnable);
+
 // -- Window --
 
 LIBGAME_EXPORT void InitWindow(const char* title);

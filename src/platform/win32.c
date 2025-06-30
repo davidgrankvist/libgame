@@ -389,10 +389,6 @@ static void InitInputWin32() {
 
 // -- Render --
 
-static void MakeDrawCallGl() {
-    EndDrawGl();
-}
-
 static void EndFrameGlWin32() {
     EndFrameGl();
     SwapBuffers(windowHdc);
@@ -410,6 +406,7 @@ static void InitRenderGlWin32() {
     render.EndFrame = EndFrameGlWin32;
     render.SetCamera2D = SetCamera2DGl;
     render.SetCamera3D = SetCamera3DGl;
+    render.SetTransparencyMode = SetTransparencyModeGl;
     InitPlatformRender(render);
 }
 

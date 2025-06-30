@@ -197,7 +197,14 @@ void InitGraphicsGl(OpenGlExt ext) {
     openGlExt.glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, valuesPerVertex * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
     openGlExt.glEnableVertexAttribArray(1);
 
+    /*
+     * Always enable depth testing, regardless of transparency mode.
+     * If an opaque object is in front of a transparent object, then
+     * the transparent object should be occluded and not blended.
+     */
     glEnable(GL_DEPTH_TEST);
+    // disable blending by default
+    SetTransparencyModeGl(false);
 
     AssertNoGlError("Failed to initialize OpenGL");
 }
@@ -242,7 +249,7 @@ static void UpdateCameraTransform() {
     openGlExt.glUniformMatrix4fv(cameraTransformLoc, 1, false, transform.m);
 }
 
-void EndDrawGl() {
+void MakeDrawCallGl() {
     //  update vertices
     int length = currentVertexCount - currentVertexStart;
     int offset = currentVertexStart * valuesPerVertex * sizeof(GLfloat);
@@ -255,7 +262,7 @@ void EndDrawGl() {
     int indexSize = indexLength * sizeof(GLuint);
     openGlExt.glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, indexOffset, indexSize, &vertexIndices[currentVertexIndexStart]);
 
-    glDrawElements(GL_TRIANGLES, indexLength, GL_UNSIGNED_INT, (void*)(uintptr_t)currentVertexIndexStart);
+    glDrawElements(GL_TRIANGLES, indexLength, GL_UNSIGNED_INT, (void*)(uintptr_t)(currentVertexIndexStart * sizeof(GLuint)));
 
     AssertNoGlError("Failed to draw");
     ResetTransform();
@@ -349,4 +356,15 @@ void DrawQuad3DGl(Vec3 topLeft, Vec3 topRight, Vec3 bottomLeft, Vec3 bottomRight
     mesh.indexCount = 6;
 
     DrawMesh(mesh);
+}
+
+void SetTransparencyModeGl(bool shouldEnable) {
+    if (shouldEnable) {
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glDepthMask(GL_FALSE);
+    } else {
+        glDisable(GL_BLEND);
+        glDepthMask(GL_TRUE);
+    }
 }
